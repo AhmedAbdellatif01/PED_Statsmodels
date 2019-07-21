@@ -52,11 +52,17 @@ def value_loop(b0,b1,point_est):
     a_matrix.plot(kind='scatter', x='x', y='area')
     text = "The Unit Price Elasticity of Demand for this model is estimated to be: $"
     text2 = "This has a total revenue of: $"
+    text3 = "With expected sales quantity of :"
     max_area = a_matrix["area"].max()
     s_m = a_matrix.sort('area',ascending=False)
-    unit_elastic_price = s_m.iloc[0]['y']
+    unit_elastic_price = s_m.iloc[0]['x']
+    expected_sales_quntity = s_m.iloc[0]['y']
     print text + str(round(unit_elastic_price,2))
     print text2 + str(round(max_area,2))
+    print text2 + str(round(expected_sales_quntity,2))
+    plt.plot(unit_elastic_price, max_area,'ro')
+    plt.plot([unit_elastic_price,unit_elastic_price],[max_area,0],'k')
+    plt.plot([0,unit_elastic_price],[max_area,max_area],'k')
     return
 
 reg_fit(df)
